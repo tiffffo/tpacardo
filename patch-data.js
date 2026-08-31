@@ -1,0 +1,1 @@
+quickBank.forEach(q=>{if(q.why)q.why=q.why.replace('429 is Too Many Requests. A PO should understand quota, retry behaviour and whether usage fits the contract.','429 is Too Many Requests. Quota, retry behaviour and whether usage fits the contract belong in the investigation.')});
