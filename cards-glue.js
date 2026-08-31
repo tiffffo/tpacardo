@@ -1,0 +1,1 @@
+const flashcards=[...flashcards_part0,...flashcards_part1,...flashcards_part2,...flashcards_part3,...flashcards_part4,...flashcards_part5];
