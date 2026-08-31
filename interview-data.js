@@ -1,0 +1,117 @@
+const interviewLevels=[
+{
+ id:'screen',name:'Screen',icon:'☎️',time:'20–30 min',summary:'Background, motivation, role understanding and concise communication.',count:5,
+ questions:[
+  {q:'Give me the two-minute version of your career and the pattern that connects the moves you have made.',follow:['What part of that story is most relevant here?','What would you leave out if you only had 60 seconds?'],checks:['A clear through-line rather than a chronology dump','Specific ownership, not only team context','Why the next move makes sense now','Plain language and a clean ending'],signals:['problem','system','operator','customer','product','learn','built','led']},
+  {q:'What do you think this role actually owns day to day?',follow:['What does it not own?','Where would you expect the hardest handoffs to be?'],checks:['External partner discovery and expectation management','Translating needs into internal product work','Following delivery through QA, launch and adoption','Rider outcomes remain part of the decision'],signals:['agency','partner','rider','requirements','launch','adoption','engineering','data']},
+  {q:'Why work on public mobility products instead of another software category?',follow:['What have you learned from using transit as a rider?','What is one local transit problem you would want to understand better?'],checks:['Specific motivation beyond “I like transit”','A rider observation grounded in actual behaviour','Understanding that service quality and information quality interact','No attempt to fake agency experience'],signals:['rider','service','city','transit','route','reliability','access','mobility']},
+  {q:'Your background is not a traditional transit-agency or B2G path. Why should that not be a deal-breaker?',follow:['Where is the analogy to your past experience weakest?','What would you need to learn fastest?'],checks:['Names the gap directly','Uses precise adjacent evidence rather than saying “transferable”','Shows a repeatable way of learning complex operations','Does not pretend manufacturing, travel and public transit are the same'],signals:['gap','learn','operations','stakeholder','system','user','evidence','ramp']},
+  {q:'Tell me about a product you use often that you would improve. Start with the problem, not the feature.',follow:['How would you know the problem is real?','What could make you decide not to build anything?'],checks:['Observed behaviour or pain before solution','Who experiences it and in what context','Evidence you would seek','A success measure and an explicit uncertainty'],signals:['problem','evidence','user','measure','hypothesis','data','why','context']},
+  {q:'What kind of ambiguity energizes you, and what kind creates risk?',follow:['Give me a real example of each.','What do you do when a decision must be made before you have enough evidence?'],checks:['Distinguishes productive ambiguity from missing ownership/constraints','Shows a decision process under uncertainty','Names reversible vs irreversible decisions','Communicates uncertainty rather than hiding it'],signals:['uncertainty','risk','decision','constraint','reversible','evidence','owner']},
+  {q:'What would you want to learn in your first month before making strong product recommendations?',follow:['Who would you learn it from?','What would you look at in the data?'],checks:['People, workflows, data and existing product decisions','Agency and rider perspectives','Existing metrics and instrumentation','Technical/data dependencies and local context'],signals:['agency','rider','data','engineering','workflow','metric','context','product']},
+  {q:'Tell me about a time you had to explain a technical or operational problem to someone who did not share your context.',follow:['How did you know they understood?','What did you remove from your explanation?'],checks:['Adapts language to the audience','Preserves the decision-relevant facts','Makes ownership/next step clear','Does not use jargon as evidence of expertise'],signals:['explain','decision','context','technical','stakeholder','next','understand']}
+ ]
+},
+{
+ id:'team',name:'Team round',icon:'👥',time:'45–60 min',summary:'Cross-functional collaboration, requirements, data, QA and partner communication.',count:5,
+ questions:[
+  {q:'An agency asks for a dashboard showing every rider complaint in real time. Walk the team through your first steps.',follow:['Design asks what should be on the first screen. What do you say?','Data says the feedback is sparse and biased. What changes?'],checks:['Treats “dashboard” as a requested solution','Finds the decision/job beneath the request','Clarifies users, privacy, freshness and data quality','Defines a minimum useful outcome before UI'],signals:['decision','problem','user','privacy','data','minimum','validate','agency']},
+  {q:'Engineering says a real-time integration is technically possible but unreliable because a third-party feed drops updates intermittently. How do you move forward?',follow:['The partner still wants a launch date. What do you communicate?','What would make you block launch?'],checks:['Separates product need from dependency reliability','Defines failure behaviour and monitoring','Works with Engineering on options instead of prescribing code','Manages partner confidence without false certainty'],signals:['failure','dependency','monitor','fallback','risk','partner','engineering','launch']},
+  {q:'Design wants a simpler rider experience. An agency wants extra controls and information that would add complexity. How do you handle the disagreement?',follow:['What if the agency is your largest partner?','What if the need is caused by a genuinely local rule?'],checks:['Identifies the underlying agency requirement','Protects rider usability without making “rider wins” automatic','Considers configuration/localization','Names contractual and strategic constraints'],signals:['rider','agency','tradeoff','local','configuration','constraint','contract','need']},
+  {q:'You are kicking off a new agency feature with operations, IT, customer experience, Design, Data and Engineering. What must be true by the end of kickoff?',follow:['Who is the decision-maker?','What would you document immediately after?'],checks:['Problem/outcome and scope','Stakeholders, decision rights and sign-off','Data/technical dependencies and risks','Success measures, milestones and next decisions'],signals:['scope','owner','decision','dependency','risk','success','stakeholder','milestone']},
+  {q:'A bug report says “arrival times are wrong.” What would you put in front of Engineering so they can investigate efficiently?',follow:['How do you distinguish a data issue from a product issue?','What if you cannot reproduce it?'],checks:['Expected vs actual behaviour','Route/trip/stop/time/city/environment','Screenshots/log identifiers/data samples where possible','Impact, frequency and reproduction confidence'],signals:['expected','actual','route','time','reproduce','log','data','impact']},
+  {q:'A feature is code-complete and works in staging. What else do you need before launch?',follow:['Which missing item would you treat as a blocker?','What belongs in the first 24-hour monitoring plan?'],checks:['QA/UAT and realistic local data','Production credentials/dependencies','Analytics instrumentation and success/guardrails','Rollout, rollback, support and partner communication'],signals:['qa','uat','production','analytics','rollback','monitor','support','launch']},
+  {q:'How would you test a feature that works across many cities with different service patterns and data quality?',follow:['How would you choose test markets?','What would you automate versus manually inspect?'],checks:['Representative segmentation rather than one “happy” city','Local service/data edge cases','Core regression plus market-specific UAT','Clear expected behaviour when inputs are degraded'],signals:['segment','city','edge','data','uat','regression','degraded','test']},
+  {q:'A data analyst tells you a 4.9/5 satisfaction score is based on only 15 responses. Another route has 4.6/5 from 8,000. What do you do with that?',follow:['Would you show both to the agency?','What additional cut of the data matters?'],checks:['Does not rank raw averages blindly','Considers sample size/confidence','Segments by route/time/service condition where relevant','Connects analysis to a decision'],signals:['sample','confidence','segment','response','decision','trend','bias']},
+  {q:'The requirements change halfway through development because the agency finally clarifies a local policy. What do you do?',follow:['Who absorbs the schedule impact?','When would you refuse the change?'],checks:['Revisit problem and scope, do not hide the change','Estimate impact/dependencies with the team','Separate must-have policy requirement from nice-to-have expansion','Reset expectations and document the decision'],signals:['scope','impact','dependency','must','expectation','document','decision','change']},
+  {q:'You discover two teams have different assumptions about what “launched” means. How do you fix the situation and prevent a repeat?',follow:['What artifacts would you use?','What if neither team owns the handoff?'],checks:['Makes exit criteria explicit','Clarifies ownership and handoffs','Uses a shared definition of readiness/done','Fixes process without turning it into bureaucracy theatre'],signals:['criteria','owner','handoff','ready','done','process','shared']}
+ ]
+},
+{
+ id:'manager',name:'Manager round',icon:'🧭',time:'45–60 min',summary:'Judgment, agency intuition, prioritization, ownership, failure and self-awareness.',count:5,
+ questions:[
+  {q:'You have five partner requests and capacity for two. How do you decide without hiding behind a framework?',follow:['What would make a smaller agency request beat a larger one?','What do you tell the three you defer?'],checks:['Understands underlying problems before scoring','Balances rider impact, agency value, commitments, scale, effort and risk','Names what happens if you wait','Communicates the decision and uncertainty'],signals:['impact','commit','scale','risk','effort','defer','rider','agency']},
+  {q:'An agency strongly wants something that you believe will make the rider experience worse. What do you do?',follow:['When would you still ship it?','Who has the final call?'],checks:['Investigates the requirement beneath the request','Makes the rider cost explicit','Considers configuration/localization/alternative paths','Can make and communicate a difficult recommendation'],signals:['need','rider','agency','tradeoff','alternative','local','recommend','constraint']},
+  {q:'Tell me about a time your first understanding of a problem was wrong.',follow:['What evidence changed your mind?','What did changing direction cost?'],checks:['Names the original assumption without sanitizing it','Shows the evidence that overturned it','Explains the decision/change personally owned','Says what would be done differently next time'],signals:['assumption','wrong','evidence','changed','decision','learn','different','I']},
+  {q:'Tell me about a product or system you shipped that looked right conceptually but broke down in real operations.',follow:['What had you missed?','How did you change the product or process?'],checks:['Specific operational reality','Personal ownership, including uncomfortable parts','How feedback/incident evidence changed requirements','Learning that survives beyond one bug fix'],signals:['operation','assumption','user','incident','requirement','changed','learn','I']},
+  {q:'How would you develop intuition for what 200+ agency partners need without turning the roadmap into a request queue?',follow:['What signals would you aggregate?','How do you preserve truly local needs?'],checks:['Looks for repeated underlying jobs/problems','Combines meetings, support, usage, rider feedback and data quality','Distinguishes scalable patterns from configuration/localization','Keeps strategy and rider value in the loop'],signals:['pattern','usage','feedback','support','scale','local','strategy','rider']},
+  {q:'A partner expects a feature before a major public launch, but Engineering says it cannot responsibly be ready. What do you do today?',follow:['What options do you put on the table?','What if the feature is in the contract?'],checks:['Does not promise what the team cannot support','Separates blocker from desirable scope','Explores phased/manual/fallback options','Escalates contractual risk with clear facts and decision owners'],signals:['scope','phased','fallback','contract','risk','owner','expectation','launch']},
+  {q:'What is a legitimate reason to say no to a large agency?',follow:['How do you say no without ending the relationship?','When would “not now” be more accurate?'],checks:['Product/rider harm, weak reusable value, disproportionate cost or strategy mismatch','Evidence and alternatives, not authority posture','Clear distinction between no, not now and different approach','Relationship preserved through transparency'],signals:['strategy','cost','rider','alternative','not now','evidence','relationship','scale']},
+  {q:'How do you know whether an agency-facing feature is successful after it ships?',follow:['What if agencies enable it but riders do not benefit?','What if usage is low because the task is monthly?'],checks:['Defines value behaviour before launch','Agency activation/adoption plus rider outcome where relevant','Expected cadence and segmentation','Qualitative feedback and guardrails alongside usage'],signals:['activation','adoption','rider','metric','segment','cadence','guardrail','feedback']},
+  {q:'Where would you expect your technical depth to be challenged in this role?',follow:['What do you need to understand about APIs or data feeds without coding them?','How do you avoid bluffing?'],checks:['Names concrete gaps rather than “I’m not technical”','Understands inputs/outputs/errors/freshness/latency/dependencies','Knows what information Engineering needs','Can say “I do not know yet” and define how to find out'],signals:['api','feed','error','latency','dependency','engineering','learn','unknown']},
+  {q:'Tell me about a time you influenced people you did not manage to change direction.',follow:['Why did they resist?','What would they say you did well or poorly?'],checks:['Real disagreement, not coordination theatre','Evidence/listening and a decision mechanism','Personal actions and tradeoffs','Self-awareness about relationship cost'],signals:['disagree','listen','evidence','decision','influence','tradeoff','I']},
+  {q:'What is the difference between being the voice of a customer and simply agreeing with the customer?',follow:['Give me an example where advocacy means pushing back.','How do riders fit into that answer?'],checks:['Advocacy translates the underlying need accurately','Pushback can protect long-term value','Customer and end-user are not always the same actor','Makes tradeoffs visible rather than burying them'],signals:['need','translate','push','rider','customer','tradeoff','value','advocate']},
+  {q:'What mistake would you be most worried about making in your first six months?',follow:['How would you detect it early?','What operating habit reduces the risk?'],checks:['Specific and role-relevant risk','Early signal/feedback loop','Concrete prevention habit','Shows self-awareness without fake humility'],signals:['risk','signal','feedback','habit','early','learn','assumption']}
+ ]
+}
+];
+
+const takeHomeAssignments=[
+{
+ id:'feedback',title:'Rider signal memo',time:'75 min',
+ brief:'A partner asks which part of its bus network deserves attention first. You receive a small rider-feedback extract. Produce a decision-oriented first pass, not a polished dashboard.',
+ headers:['Group','Responses','Avg rating','On-time satisfied','Crowding concern'],
+ rows:[['North',820,'4.1/5','72%','38%'],['Central',1680,'3.8/5','61%','55%'],['South',310,'3.4/5','49%','64%'],['Express',95,'2.9/5','37%','81%']],
+ calc:'What is the response-weighted average rating across all four groups?',answer:3.82,unit:'/5',
+ deliverables:['Three observations, each tied to evidence','Two caveats about what this sample cannot prove','One recommendation for what to investigate next','Three additional cuts/fields you would request','A short note you could send to the partner'],
+ rubric:['Do not automatically prioritize the lowest rating without considering exposure and sample size.','Separate rider perception from operational cause.','Use the data to narrow investigation, not to declare root cause.','State what decision the next evidence should enable.']
+},
+{
+ id:'realtime',title:'Real-time quality triage',time:'90 min',
+ brief:'Complaints about “wrong bus times” are increasing. You have one week of route-group quality metrics. Prepare a first-pass diagnosis and an action plan for the partner and internal teams.',
+ headers:['Group','ETA accuracy','RT coverage','Ghost rate','Jitter','Complaints / 10k trips'],
+ rows:[['A','91%','94%','1.2%','1.8%',4],['B','88%','71%','4.9%','5.8%',19],['C','84%','90%','2.1%','7.1%',11],['D','93%','82%','5.6%','2.0%',16]],
+ calc:'What is the gap in real-time coverage between the best and worst groups?',answer:23,unit:' pts',
+ deliverables:['Rank the first two investigations and explain why','Separate hypotheses for coverage, ghost service and prediction instability','Draft the questions you would ask the partner','Define a minimum “fixed” signal and one guardrail','State what you would not conclude yet'],
+ rubric:['Accuracy alone can hide missing coverage.','Ghosts, jitter and missing data are different failure modes.','Partner operations and published data can diverge.','A useful plan names evidence owners and handoffs.']
+},
+{
+ id:'widget',title:'Web funnel investigation',time:'75 min',
+ brief:'Four partner websites embed a trip-planning experience. One partner says “nobody uses it.” Use the funnel below to decide whether the issue is discovery, activation, completion or something else.',
+ headers:['Site','Eligible visits','Planner opened','Route searched','Trip result viewed'],
+ rows:[['A',42000,6300,5040,4620],['B',18000,4140,3105,2790],['C',55000,2750,2200,2090],['D',12000,3000,1830,1350]],
+ calc:'What percent of eligible visits open the planner on Site C?',answer:5,unit:'%',
+ deliverables:['Identify the most important funnel differences','Choose one site for deeper investigation and justify it','List additional segmentation you need','Propose one test, not a redesign','Define success and a guardrail'],
+ rubric:['Separate discovery from downstream completion.','Do not compare raw counts when traffic volumes differ.','Look for local context before generalizing across partners.','A test should correspond to the hypothesized bottleneck.']
+},
+{
+ id:'launch',title:'Official-app launch plan',time:'90 min',
+ brief:'A large agency will promote the app as its official rider experience in six weeks. Build a launch-readiness brief that balances partner expectations, rider experience and technical/data risk.',
+ headers:['Area','Current state','Risk'],
+ rows:[['Static schedule','Validated','Low'],['Vehicle positions','82% coverage','Medium'],['Trip updates','Cancellations inconsistently published','High'],['Service alerts','Available; effects not consistently classified','Medium'],['Localized copy','Agency review pending','Medium']],
+ calc:'If vehicle-position coverage needs to reach 90%, how many percentage points must it improve?',answer:8,unit:' pts',
+ deliverables:['Top five launch risks in order','What must block launch vs what can follow','Agency/internal owners for each critical item','Rider-facing fallback behaviour for degraded live data','First-week monitoring plan'],
+ rubric:['An “official app” launch raises the cost of trust failures.','Data readiness is part of product readiness.','Not every imperfection is a blocker.','Monitoring and rollback/mitigation belong in the launch plan.']
+},
+{
+ id:'agencytool',title:'Agency tool MVP',time:'75 min',
+ brief:'Several agencies ask for a tool to send and manage service alerts. Their workflows differ. Turn the request into a first-version product brief.',
+ headers:['Agency','Editors','Alerts/week','Main pain'],
+ rows:[['A',4,18,'Slow publishing'],['B',22,65,'Permissions / review'],['C',7,11,'Targeting affected service'],['D',3,4,'No dedicated alert tool']],
+ calc:'What share of all weekly alerts in this sample comes from Agency B?',answer:66.3,unit:'%',
+ deliverables:['Underlying jobs/problems, not just requested features','Primary user(s) and permission model','MVP scope and explicit non-goals','Five acceptance criteria including error/empty states','Adoption metric, rider outcome and guardrail'],
+ rubric:['One UI may serve different operational jobs.','Permissions and auditability can be core B2G requirements.','Alert semantics affect rider behaviour and trip planning.','Do not let the largest agency automatically define the whole product.']
+}
+];
+
+const presentationQuestions=[
+ {q:'Give me your recommendation in one sentence before you explain the analysis.',lens:'Can you lead with a decision instead of making the room wait for the conclusion?'},
+ {q:'What is the most important assumption in your recommendation?',lens:'Strong presenters expose uncertainty instead of burying it in backup slides.'},
+ {q:'What did you deliberately leave out of the first version?',lens:'Scope judgment is often clearer in exclusions than in a long feature list.'},
+ {q:'Engineering says your estimated effort is twice what you assumed. What changes?',lens:'New technical information should change prioritization or scope, not just the timeline.'},
+ {q:'The agency disagrees with your recommendation. How do you handle the meeting?',lens:'Defend the reasoning without becoming attached to the solution. Identify what evidence or constraint differs.'},
+ {q:'A rider metric improves, but agency usage of the tool stays low. Is the launch successful?',lens:'The customer and end user can have different value signals. Define the intended outcome for both.'},
+ {q:'Your strongest insight comes from the smallest sample. Do you still present it?',lens:'Separate an interesting signal from a confident conclusion and label uncertainty.'},
+ {q:'What would make you stop or roll back this launch?',lens:'A presentation should include failure conditions and guardrails, not only upside.'},
+ {q:'Why should this be a reusable product instead of custom work for one partner?',lens:'Show the shared underlying job and the dimensions that should remain configurable/local.'},
+ {q:'If you had one more week, what would you learn before committing?',lens:'Prioritize the highest-discrimination evidence, not a shopping list of more research.'},
+ {q:'What is the strongest argument against your own recommendation?',lens:'Good judgment can articulate the alternative fairly and explain why it still loses.'},
+ {q:'What would you show on one slide if the audience only remembered that slide?',lens:'Compression reveals whether the narrative has a real spine.'}
+];
+
+const wildcardTopics=[
+ 'Explain a system you understand deeply to a smart non-expert in five minutes.',
+ 'Teach the room something you care about that has a beginning, middle and useful ending.',
+ 'Explain how a familiar everyday process actually works behind the scenes.',
+ 'Tell the story of a product, service or system that changed because reality did not match the original design.'
+];
