@@ -1,0 +1,13 @@
+let state=JSON.parse(localStorage.getItem('fieldwork_game_v3')||localStorage.getItem('fieldwork_game')||'null')||{xp:0,hearts:5,streak:1,skills:{},mistakes:{},known:{},cycle:null,nextRefresh:null};skills.forEach(s=>{if(state.skills[s[1]]==null)state.skills[s[1]]=s[3]});
+let seed=1,rng=()=>Math.random(),quickSet=[],qi=0,selected=null,deck=[],di=0,currentData=null,inv=null,invPicks=[],decisionSelected=[];
+function save(){localStorage.setItem('fieldwork_game_v3',JSON.stringify(state));chrome()}
+function ensureCycle(force=false){const now=Date.now();if(force||!state.cycle||!state.nextRefresh||now>=state.nextRefresh){state.cycle=Math.floor(Math.random()*2147483646)+1;state.nextRefresh=now+(8+Math.random()*4)*3600000;save()}seed=state.cycle;rng=mulberry32(seed);quickSet=shuffleSeeded(quickBank.slice()).slice(0,8)}
+function mulberry32(a){return function(){let t=a+=0x6D2B79F5;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
+function ri(a,b){return Math.floor(rng()*(b-a+1))+a}function round(n,d=1){const p=10**d;return Math.round(n*p)/p}
+function shuffleSeeded(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function chrome(){document.getElementById('xp').textContent=state.xp;document.getElementById('hearts').textContent=state.hearts;document.getElementById('streak').textContent=state.streak;document.getElementById('bigxp').textContent=state.xp;updateRefresh()}
+function updateRefresh(){const el=document.getElementById('refresh');if(!el)return;const ms=Math.max(0,state.nextRefresh-Date.now());const h=Math.floor(ms/3600000),m=Math.floor((ms%3600000)/60000);el.textContent=`${h}h ${m}m`;if(ms<=0){ensureCycle(true);renderHome()}}
+function renderHome(){const html=modes.slice(0,8).map(modeCard).join('');document.getElementById('homeModes').innerHTML=html;document.getElementById('skills').innerHTML=skills.map(s=>`<div class="card skill"><div class="score">${Number(state.skills[s[1]]).toFixed(1)}</div><div class="icon">${s[0]}</div><h3>${s[1]}</h3><p>${s[2]}</p></div>`).join('')}
+function renderLibrary(){document.getElementById('libraryModes').innerHTML=modes.map(modeCard).join('')}
+function modeCard(m){return`<div class="card mode"><div class="icon">${m[0]}</div><h3>${m[1]}</h3><p>${m[2]}</p><button class="btn secondary" onclick="${m[3]}">${m[4]}</button></div>`}
+function renderRefs(){document.getElementById('refs').innerHTML=refs.map(r=>`<div class="card ref"><a href="${r[1]}" target="_blank" rel="noopener">${r[0]} ↗</a><p>${r[2]}</p></div>`).join('')}
